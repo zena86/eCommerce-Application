@@ -1,5 +1,12 @@
-function App() {
-  return <h1>App</h1>;
-}
+import { RouterProvider } from "react-router-dom";
+import { CssBaseline } from "@mui/material";
+import router from "./router/router";
 
-export default App;
+export default function App() {
+  return (
+    <>
+      <CssBaseline />
+      <RouterProvider router={router} />
+    </>
+  );
+}
