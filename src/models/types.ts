@@ -33,8 +33,11 @@ export enum CountryCode {
   Russia = "RU",
   Belarus = "BY",
   Georgia = "GE",
-  UnitedStates = "US",
-  Canada = "CA",
+}
+export enum Country {
+  Russia = "Russia",
+  Belarus = "Belarus",
+  Georgia = "Georgia",
 }
 
 export enum AddressType {
@@ -42,4 +45,15 @@ export enum AddressType {
   Billing = "billing",
 }
 
+export enum StatusCodes {
+  Ok = 200,
+}
+
 export type AdditionalAddressType = AddressType.Shipping | AddressType.Billing;
+
+export type TCatalogFilterValues = Record<string, string[]>;
+
+export enum SortingMethods {
+  asc = "asc",
+  desc = "desc",
+}
