@@ -1,0 +1,21 @@
+.promo-code-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  * {
+    margin: 0;
+  }
+
+  .promo-code {
+    font-size: 1.5rem;
+  }
+}
+
+.card-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
