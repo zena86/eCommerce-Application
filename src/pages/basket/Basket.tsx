@@ -23,6 +23,7 @@ export default function Basket() {
   const [isLoading, setIsLoading] = useState(true);
   const [isChanging, setIsChanging] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+
   const handleUpdateShoppingCart = async () => {
     try {
       const fetchShoppingCart = await getShoppingCart();
@@ -33,11 +34,26 @@ export default function Basket() {
       throw new Error(`An error occurred while updating the shopping cart: ${error}`);
     }
   };
-  const handleDeleteShoppingCartItem = async (cartId: string, version: number, itemId: string) => {
+  const handleDeleteShoppingCartItem = async (cartId: string, itemId: string) => {
     setIsChanging(true);
-    await cartDeleteItem(cartId, version, itemId);
-    await handleUpdateShoppingCart();
-    setIsChanging(false);
+    try {
+      const fetchShoppingCart = await getShoppingCart();
+      const [cart] = fetchShoppingCart.body.results;
+      const hasItemInCart = cart.lineItems.some((item) => item.id === itemId);
+
+      if (!hasItemInCart) {
+        await handleUpdateShoppingCart();
+        setIsChanging(false);
+        return;
+      }
+
+      await cartDeleteItem(cartId, cart.version, itemId);
+    } catch (error) {
+      throw new Error(`An error occurred: ${error}`);
+    } finally {
+      await handleUpdateShoppingCart();
+      setIsChanging(false);
+    }
   };
 
   const handleClearShoppingCart = async () => {
@@ -49,10 +65,11 @@ export default function Basket() {
           await deleteShoppingCart(cart.id, cart.version);
         });
         await Promise.all(deleteShoppingCarts);
-        await handleUpdateShoppingCart();
-        setIsChanging(false);
       } catch (error) {
         throw new Error(`An error occurred while clearing the shopping cart: ${error}`);
+      } finally {
+        await handleUpdateShoppingCart();
+        setIsChanging(false);
       }
     }
   };
@@ -64,14 +81,19 @@ export default function Basket() {
         const [cart] = fetchShoppingCart.body.results;
         setShoppingCart(cart);
         setIsLoading(false);
+        if (cart && cart.lineItems.length > 0) {
+          const counter = cart.lineItems.reduce((accum, cartItem) => accum + cartItem.quantity, 0);
+          dispatch(setCount(counter));
+        } else {
+          dispatch(setCount(0));
+        }
       } catch (error) {
         setIsLoading(false);
         throw new Error(`An error occurred while loading the shopping cart: ${error}`);
       }
     };
-
     loadProducts();
-  }, []);
+  }, [dispatch]);
 
   if (isLoading) {
     return <LoadingView />;
@@ -102,7 +124,6 @@ export default function Basket() {
                     <BasketProductCard product={product} />
                     <BasketProductQuantity
                       product={product}
-                      shoppingCartVersion={shoppingCart.version}
                       cartId={shoppingCart?.id}
                       isChanging={isChanging}
                       setIsChanging={setIsChanging}
@@ -116,7 +137,7 @@ export default function Basket() {
                       <IconButton
                         aria-label="delete"
                         sx={{ height: "max-content" }}
-                        onClick={() => handleDeleteShoppingCartItem(shoppingCart.id, shoppingCart.version, product.id)}
+                        onClick={() => handleDeleteShoppingCartItem(shoppingCart.id, product.id)}
                         disabled={isChanging}
                       >
                         <DeleteIcon />
@@ -138,8 +159,6 @@ export default function Basket() {
                 )}
                 <BasketPromoCodeField
                   shoppingCartID={shoppingCart.id}
-                  shoppingCartVersion={shoppingCart.version}
-                  shoppingCartDiscountCodes={shoppingCart.discountCodes}
                   isChanging={isChanging}
                   setIsChanging={setIsChanging}
                   handleUpdateShoppingCart={handleUpdateShoppingCart}
