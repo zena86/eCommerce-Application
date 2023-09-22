@@ -23,7 +23,6 @@ export default function Basket() {
   const [isLoading, setIsLoading] = useState(true);
   const [isChanging, setIsChanging] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-
   const handleUpdateShoppingCart = async () => {
     try {
       const fetchShoppingCart = await getShoppingCart();
@@ -31,7 +30,7 @@ export default function Basket() {
       setShoppingCart(cart);
       dispatch(setCount(await getProductCountFromCart()));
     } catch (error) {
-      throw new Error(`An error occurred while updating the shopping cart: ${error}`);
+      console.error(`An error occurred while updating the shopping cart: ${error}`);
     }
   };
   const handleDeleteShoppingCartItem = async (cartId: string, itemId: string) => {
@@ -39,6 +38,10 @@ export default function Basket() {
     try {
       const fetchShoppingCart = await getShoppingCart();
       const [cart] = fetchShoppingCart.body.results;
+      if (!cart) {
+        await handleUpdateShoppingCart();
+        return;
+      }
       const hasItemInCart = cart.lineItems.some((item) => item.id === itemId);
 
       if (!hasItemInCart) {
@@ -49,7 +52,7 @@ export default function Basket() {
 
       await cartDeleteItem(cartId, cart.version, itemId);
     } catch (error) {
-      throw new Error(`An error occurred: ${error}`);
+      console.error(`An error occurred: ${error}`);
     } finally {
       await handleUpdateShoppingCart();
       setIsChanging(false);
@@ -66,7 +69,7 @@ export default function Basket() {
         });
         await Promise.all(deleteShoppingCarts);
       } catch (error) {
-        throw new Error(`An error occurred while clearing the shopping cart: ${error}`);
+        console.error(`An error occurred while clearing the shopping cart: ${error}`);
       } finally {
         await handleUpdateShoppingCart();
         setIsChanging(false);
@@ -87,9 +90,15 @@ export default function Basket() {
         } else {
           dispatch(setCount(0));
         }
+        if (cart && cart.lineItems.length > 0) {
+          const counter = cart.lineItems.reduce((accum, cartItem) => accum + cartItem.quantity, 0);
+          dispatch(setCount(counter));
+        } else {
+          dispatch(setCount(0));
+        }
       } catch (error) {
         setIsLoading(false);
-        throw new Error(`An error occurred while loading the shopping cart: ${error}`);
+        console.error(`An error occurred while loading the shopping cart: ${error}`);
       }
     };
     loadProducts();
