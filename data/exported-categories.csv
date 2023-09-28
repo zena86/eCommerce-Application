@@ -1,0 +1,13 @@
+id,key,externalId,parentId,orderHint,createdAt,lastModifiedAt,name.en-US,description.en-US,slug.en-US,metaTitle.en-US,metaDescription.en-US,metaKeywords.en-US,name.ru,description.ru,slug.ru,metaTitle.ru,metaDescription.ru,metaKeywords.ru
+88a5d133-34c2-480d-b332-5f7e5c47c1dc,,,,0.01,2023-08-04T15:58:06.119Z,2023-08-04T15:58:06.119Z,Shoes,Shoes for men,shoes,Shoes,Shoes for men,,,,,,,
+2992e2dc-75cb-4711-a840-c7204f5f0323,,,,0.01,2023-08-21T11:29:44.701Z,2023-08-21T11:30:00.858Z,Dresses,Dresses for women,dresses,Dresses,Dresses,,,,,,,
+430e5305-2c9a-4d12-8b7f-ebe7c8731706,m-ls,,,0.01,2023-08-28T10:30:36.976Z,2023-08-28T10:30:36.976Z,Men's Longsleeve,Men's Longsleeve,mens-longsleeve,,,,,,,,,
+68b95e3d-ee7c-451a-8478-d4a45945d702,m-hoodie,,,0.01,2023-08-28T09:19:19.600Z,2023-08-28T09:19:19.600Z,Men's Hoodie,Men's Hoodie,mens-hoodie,,,,,,,,,
+79cdcdbc-46d3-491f-b39a-4f50cd573536,,,,0.01,2023-08-04T15:54:03.531Z,2023-08-04T15:54:03.531Z,Suits,Suits for men,suits,Suits,Suits for men,,,,,,,
+47db2b35-557f-4c5f-b617-d684690141c8,,,,0.01,2023-08-21T11:32:39.867Z,2023-08-21T11:32:39.867Z,Pullovers,Pullovers for women,pullovers,Pullovers,Pullovers for women,,,,,,,
+1cc9540e-65c5-4674-a8bc-1c6af5e61283,m-t-shirt,,,0.01,2023-08-28T07:38:28.611Z,2023-09-02T11:13:16.786Z,Men's T-Shirts,T-Shirts  for men,mens-t-shirts, Men's T-Shirts,T-Shirts  for men,,,,,,,
+b95862ce-b223-48a5-9d71-42ece0d7acd1,,,,0.01,2023-08-21T11:34:29.737Z,2023-08-21T11:34:29.737Z,Longsleeves,Longsleeves for women,longsleeves,Longsleeves,Longsleeves for women,,,,,,,
+75fe27c5-c364-4eb0-8e07-f71269e292ad,M-1,,,0,2023-08-04T15:42:54.913Z,2023-08-04T15:42:54.913Z,Men's Fashion,Fashion for all Men's products,mens-fashion,Men's fashion wear,Category for all men's fashion items,,,,,,,
+ba14b538-5f50-40e2-9a45-e715c3de667b,W-1,,,0.1,2023-08-04T15:49:48.367Z,2023-08-04T15:49:48.367Z,Women's fashion,All fashion items for women,womens-fashion,Women's fashion items,All the great fashion items for women,,,,,,,
+a12f9379-084c-42e3-b2b2-7f10e7048f22,,,,0.1,2023-08-04T16:05:01.265Z,2023-08-04T16:05:01.265Z,Dress shoes,Dress shoes for men,dress-shoes,Dress shoes,Dress shoes for men,,,,,,,
+ab2b90bc-c8bd-4ffa-9cb4-3dd3fbdfbfc9,,,,0.01,2023-08-21T11:22:24.665Z,2023-08-21T11:26:17.477Z,T-shirts,T-shirts for women,tee,tee,Tees for women,,,,,,,
